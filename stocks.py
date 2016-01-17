@@ -27,6 +27,15 @@ def binary_search(a, x, lo=0, hi=None):
     else:
     	return False
 
+def get_stock_data(stock_name):
+	if binary_search(stocks, stock_name) is True:
+		data = Quandl.get(database+stock_name, authtoken=auth_token)
+		return data
+	else:
+		return None
+
 print binary_search(stocks, 'AAPL')
-data = Quandl.get(database+"AAPL", authtoken=auth_token, returns="numpy")
+#data = Quandl.get(database+"AAPL", authtoken=auth_token, returns="numpy")
+data = get_stock_data("AAPL")
 print data
+data.to_csv('stock.csv')
