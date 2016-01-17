@@ -24,9 +24,12 @@ def stock_info():
 			'success': 'failure'
 			})
 	else:
+		json = get_stock_info(stock_symbol)
+		print 'c'
+		print json
 		return jsonify({
 			'success': 'success',
-			'stockName': get_stock_info(stock_symbol)
+			'stockName': json
 			})
 
 
