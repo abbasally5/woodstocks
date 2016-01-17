@@ -36,7 +36,7 @@ def get_pitch(close):
 	num = int(round(close))
 	return num % 87 + 21
 
-def convert_to_song(file_name, stock_name):
+def convert_to_song(file_name):
 	
 	mf = MIDIFile(1)
 	track = 0
@@ -47,7 +47,7 @@ def convert_to_song(file_name, stock_name):
 	channel = 0
 	volume = 100
 	
-	file_loc = os.path.join(os.getcwd(), file_name)
+	file_loc = os.path.join(os.getcwd(), file_name+'.csv')
 	with open(file_loc, "rb") as csvfile:
 		reader = csv.reader(csvfile)
 		reader = list(reader)
@@ -67,7 +67,7 @@ def convert_to_song(file_name, stock_name):
 			i += 100
 			print i
 
-	with open("stocksong.mid", 'wb') as outf:
+	with open(file_name + '.mid', 'wb') as outf:
 		mf.writeFile(outf)
 	outf.close()
 

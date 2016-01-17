@@ -49,6 +49,10 @@ def get_stock_info(stock_symbol):
 	return json
 
 
+# filename does not have extension/file type
+def data_to_csv(data, filename):
+	data.to_csv(filename+'.csv')
+
 #print binary_search('AAPL')
 #data = Quandl.get(database+"AAPL", authtoken=auth_token, returns="numpy")
 #name = get_stock_info('MAT')

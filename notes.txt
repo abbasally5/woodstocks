@@ -1,7 +1,11 @@
 Can't i just convert to music when they search for a stock?
 
 To Do after basic implementation:
-Adjust time format in stock card
-format stock card
-Add animations to button and stock card
-Darken background image
+	- Adjust time format in stock card
+	- format stock card
+	- Add animations to button and stock card
+	- Darken background image
+	- Find a different way to center background image
+	- Add graphs for the stock
+	- move files to static folders
+	- Add about page

@@ -98,7 +98,12 @@ $('#stockForm').submit(function(e) {
 });
 
 var musicBtnSuccess = function(json) {
-	alert(json['success']);
+	if (json['success'] == 'failure')
+	{
+		alert('We encountered an ever converting the stock to music.');
+		return true;
+	}
+	alert(json['file_url']);
 	return true;
 }
 

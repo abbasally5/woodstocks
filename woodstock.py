@@ -38,12 +38,23 @@ def convertToMusic():
 	print 'in music conversion'
 	try:
 		stock_symbol = unicode(request.form.get("stock_symbol"))
+		print stock_symbol
+		data = get_stock_data(stock_symbol)
+		filename = stock_symbol
+		data_to_csv(data, filename)
+
+		convert_to_song(filename)
+
+		file_url = os.path.join(os.getcwd(), filename+'.mid')
 	except Exception as e:
 		print e
-	print stock_symbol
+		return jsonify({
+			'success': 'failure'
+			})
 
 	return jsonify({
-		'success': 'success'
+		'success': 'success',
+		'file_url': file_url
 		})
 
 
