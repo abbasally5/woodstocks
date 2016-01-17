@@ -9,3 +9,5 @@ To Do after basic implementation:
 	- Add graphs for the stock
 	- move files to static folders
 	- Add about page
+	- Allow user to post to SoundCloud
+	- design it for concurrency

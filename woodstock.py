@@ -45,7 +45,7 @@ def convertToMusic():
 
 		convert_to_song(filename)
 
-		file_url = os.path.join(os.getcwd(), filename+'.mid')
+		#file_url = os.path.join(os.getcwd(), filename+'.mid')
 	except Exception as e:
 		print e
 		return jsonify({
@@ -54,7 +54,7 @@ def convertToMusic():
 
 	return jsonify({
 		'success': 'success',
-		'file_url': file_url
+		'file_url': '/static/' + filename + '.mid'
 		})
 
 

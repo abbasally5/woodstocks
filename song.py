@@ -67,7 +67,7 @@ def convert_to_song(file_name):
 			i += 100
 			print i
 
-	with open(file_name + '.mid', 'wb') as outf:
+	with open('static/' + file_name + '.mid', 'wb') as outf:
 		mf.writeFile(outf)
 	outf.close()
 

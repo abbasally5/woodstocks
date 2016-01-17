@@ -1,4 +1,5 @@
 var stock = "";
+var playing = false;
 
 var post = function(url, data, success, complete) {
     $.ajax({
@@ -97,6 +98,12 @@ $('#stockForm').submit(function(e) {
 	}, stockFormSuccess, stockFormComplete);
 });
 
+var buildMediaBtn = function(file_url) {
+	var code = "<a href=\"#\" onClick=\"MIDIjs.play(\'" + file_url + "\');\">Play mid file</a>";
+	alert(code);
+	return code;
+}
+
 var musicBtnSuccess = function(json) {
 	if (json['success'] == 'failure')
 	{
@@ -104,6 +111,8 @@ var musicBtnSuccess = function(json) {
 		return true;
 	}
 	alert(json['file_url']);
+	mediaBtnCode = buildMediaBtn(json['file_url']);
+	$('#musicConverter').append(mediaBtnCode);
 	return true;
 }
 
