@@ -11,3 +11,5 @@ To Do after basic implementation:
 	- Add about page
 	- Allow user to post to SoundCloud
 	- design it for concurrency
+	- make play button resume rather than restart
+	- make to do list into github issues

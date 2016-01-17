@@ -1,4 +1,5 @@
 var stock = "";
+var fileurl = "";
 var playing = false;
 
 var post = function(url, data, success, complete) {
@@ -98,9 +99,27 @@ $('#stockForm').submit(function(e) {
 	}, stockFormSuccess, stockFormComplete);
 });
 
-var buildMediaBtn = function(file_url) {
-	var code = "<a href=\"#\" onClick=\"MIDIjs.play(\'" + file_url + "\');\">Play mid file</a>";
-	alert(code);
+var buildMediaBtn = function() {
+	var code = "<button id='mediaBtn' class='btn btn-success'>" + 
+	"<a href=\"#\" onClick=\"MIDIjs.play(\'" + 
+		fileurl + "\');\"><span class=\"glyphicon glyphicon-play\"" +
+		 "aria-hidden=\"true\"></span></a></button>";
+	//alert(code);
+	return code;
+}
+
+var changeMediaBtn = function() {
+	var code = ""
+	if (playing)
+	{
+		code = "<button id='mediaBtn' class='btn btn-success'>" + 
+		"<a href=\"#\" onClick=\"MIDIjs.stop();\"><span class=\"glyphicon glyphicon-pause\"" +
+		 "aria-hidden=\"true\"></span></a></button>";
+	}
+	else
+	{
+		code = buildMediaBtn();
+	}
 	return code;
 }
 
@@ -110,7 +129,8 @@ var musicBtnSuccess = function(json) {
 		alert('We encountered an ever converting the stock to music.');
 		return true;
 	}
-	alert(json['file_url']);
+	//alert(json['file_url']);
+	fileurl = json['file_url'];
 	mediaBtnCode = buildMediaBtn(json['file_url']);
 	$('#musicConverter').append(mediaBtnCode);
 	return true;
@@ -122,9 +142,17 @@ var musicBtnComplete = function() {
 
 $('#musicConverter').on('click', '#musicBtn', function(e) {
 	e.preventDefault();
-	alert('music button pressed' + stock);
+	//alert('music button pressed' + stock);
 	post('/convertMusic', {
 		'stock_symbol': stock
 	}, musicBtnSuccess, musicBtnComplete);
-	alert(stock);
+	//alert(stock);
+});
+
+$('#musicConverter').on('click', '#mediaBtn', function(e) {
+	e.preventDefault();
+	playing = !playing;
+	//alert('media button pressed ' + stock);
+	mediaBtnCode = changeMediaBtn();
+	$('#mediaBtn').replaceWith(mediaBtnCode);
 });
