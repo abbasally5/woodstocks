@@ -31,15 +31,26 @@ var buildStockCard = function(data) {
 	var change = data['Change'];
 	var date = data['Timestamp'];
 
-	var code = "<div class='panel panel-success'>" +
-  "<div class='panel-heading'>" +
+	var code = "";
+
+	if (change > 0)
+	{
+		code += "<div class='panel panel-success'>";
+	}
+	else
+	{
+		code += "<div class='panel panel-danger'>";
+	}
+
+	code += "<div class='panel-heading'>" +
     "<h3 class='panel-title'>" + name + "</h3>" +
     "<h4 class='panel-title'>" + exchange + ": " + symbol + 
     " - " + date + "</h4>" + 
   "</div>" + 
   "<div class='panel-body'>" + 
-    "<h3>" + price + "</h3>" + 
-    "<h4>" + change + "(" + changePer + "%)</h4>" +
+    "<h3>$" + (Math.round(price * 100) / 100) + "</h3>" + 
+    "<h4>" + (Math.round(change * 100) / 100) + 
+    " (" + (Math.round(changePer * 100) / 100) + "%)</h4>" +
   "</div>" +
 "</div>";
 	return code;
@@ -49,9 +60,14 @@ var buildStockCard = function(data) {
 var stockFormSuccess = function(json) {
 	$("#stockInput").val("");
 	//alert('hello');
+	if (json['success'] == 'failure')
+	{
+		alert('We do not have information for that stock');
+		return true;
+	}
 	var data = json['stockName'];
 	var htmlCode = buildStockCard(data);	
-	$('#stockCards').append(htmlCode);
+	$('#stockCards').html(htmlCode);
 	//alert('hello2');
 	return true;
 }

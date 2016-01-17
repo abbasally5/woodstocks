@@ -44,12 +44,8 @@ def get_stock_data(stock_name):
 def get_stock_info(stock_symbol):
 	json = requests.get('http://dev.markitondemand.com/Api/v2/Quote/json?symbol=%s' % stock_symbol).json()
 	exchange = requests.get('http://dev.markitondemand.com/Api/v2/Lookup/json?input=%s' % stock_symbol).json()
-	#print exchange[0]['Exchange']
-	print json
-	print 'a'
+
 	json['Exchange'] = exchange[0]['Exchange']
-	print 'b'
-	print json
 	return json
 
 
