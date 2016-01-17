@@ -33,7 +33,7 @@ var buildStockCard = function(data) {
 	var price = data['LastPrice'];
 	var changePer = data['ChangePercent'];
 	var change = data['Change'];
-	var date = data['Timestamp'];
+	var date = new Date(data['Timestamp']);
 
 	var code = "";
 
@@ -142,11 +142,9 @@ var musicBtnComplete = function() {
 
 $('#musicConverter').on('click', '#musicBtn', function(e) {
 	e.preventDefault();
-	//alert('music button pressed' + stock);
 	post('/convertMusic', {
 		'stock_symbol': stock
 	}, musicBtnSuccess, musicBtnComplete);
-	//alert(stock);
 });
 
 $('#musicConverter').on('click', '#mediaBtn', function(e) {

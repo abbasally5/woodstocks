@@ -32,9 +32,13 @@ mf.addNote(track, channel, pitch, time, duration, volume)
 with open("output.mid", 'wb') as outf:
     mf.writeFile(outf)
 """
+cscale = [36, 38, 40, 41, 43, 45, 47, 48, 50, 52, 53, 55, 57, 59, 60, 62, 
+		  64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84, 86, 88, 89, 
+		  91, 93, 95, 96]
+
 def get_pitch(close):
 	num = int(round(close))
-	return num % 87 + 21
+	return cscale[num % 35]
 
 def convert_to_song(file_name):
 	
@@ -65,7 +69,7 @@ def convert_to_song(file_name):
 			duration = 1
 			mf.addNote(track, channel, pitch, time, duration, volume)
 			i += 100
-			print i
+			#print i
 
 	with open('static/' + file_name + '.mid', 'wb') as outf:
 		mf.writeFile(outf)
@@ -73,5 +77,5 @@ def convert_to_song(file_name):
 
 
 
-#convert_to_song("stock.csv", "AAPL")
+#convert_to_song("AAPL")
 
