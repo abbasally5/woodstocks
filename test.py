@@ -5,6 +5,8 @@ import soundcloud
 
 app = Flask(__name__)
 global client
+global access_token
+global user
 
 @app.route("/")
 def login():
@@ -14,44 +16,55 @@ def login():
 							   redirect_uri='http://localhost:5000/index')
 	print client
 
-	"""
-	print 'a'
-	print client.exchange_token(code=request.args['code'])
-	access_token, expires, scope, refresh_token = client.exchange_token(code=request.args['code'])
-	code = params['code']
-	print code
-	access_token = client.exchange_token(code)
-	print access_token
-	"""
-
 	return redirect(client.authorize_url())
 
 @app.route("/index")
 def hello(code=None):
 	print 'index'
 	code = request.args['code']
-	print code
 	global client
+	global access_token
 	access_token = client.exchange_token(code)
-	"""
-	access_token, expires, scope, refresh_token = client.exchange_token(
-    code=request.args['code'])
-	"""
-	print 'a'
-	print client.get('/me').username
-	return "Hi There, %s" % client.get('/me').username
-	"""
-	print 'index'
+	print "Username = %s" % client.get('/me').username
 
-	code = params['code']
-	access_token = client.exchange_token(code)
-	print 'a'
-	print code
-	print 'b'
-	print access_token
+	global user
+	user = client.get('/me')
+	print user.id
 
-	return render_template('index.html')
-	"""
+
+	try:
+		# get a tracks oembed data
+		track_url = 'http://soundcloud.com/forss/flickermood'
+		embed_info = client.get('/oembed', url=track_url)
+		print 'a'
+		# print the html for the player widget
+		#return embed_info.html
+	except Exception as e:
+		print e
+
+	try:
+		print user.public_favorites_count
+	except Exception as e:
+		print e
+	try:
+		tracks = client.get('/users/'+str(user.id)+'/favorites')
+		for track in tracks:
+			print track.title
+			print track.uri
+			print track.permalink_url
+			embed_info = client.get('/oembed', url=track.permalink_url)
+
+			#print embed_info['html']
+			return track.stream_url
+
+	except Exception as e:
+		print e
+	try:
+		print client.get('/users/'+str(user.id)+'/playlist_likes')
+	except Exception as e:
+		print e
+
+	return render_template('index.html', data=access_token)
 
 if __name__ == "__main__":
 	app.run()
