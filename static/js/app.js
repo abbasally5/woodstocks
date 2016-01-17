@@ -1,3 +1,5 @@
+var stock = "";
+
 var post = function(url, data, success, complete) {
     $.ajax({
         url: url,
@@ -57,6 +59,13 @@ var buildStockCard = function(data) {
 }
 
 
+var buildMusicBtn = function() {
+	var code = "";
+	code += "<button id='musicBtn' class='btn btn-success'>" + 
+	"Convert " + stock + " Stock to Music" + "</button>";
+	return code;
+}
+
 var stockFormSuccess = function(json) {
 	$("#stockInput").val("");
 	//alert('hello');
@@ -66,8 +75,12 @@ var stockFormSuccess = function(json) {
 		return true;
 	}
 	var data = json['stockName'];
-	var htmlCode = buildStockCard(data);	
-	$('#stockCards').html(htmlCode);
+	stock = data['Symbol'];
+	var cardCode = buildStockCard(data);	
+	$('#stockCards').html(cardCode);
+
+	var btnCode = buildMusicBtn();
+	$('#musicConverter').html(btnCode);
 	//alert('hello2');
 	return true;
 }
@@ -82,4 +95,22 @@ $('#stockForm').submit(function(e) {
 	get('/stockquote', {
 		'stock_symbol': $('#stockInput').val()
 	}, stockFormSuccess, stockFormComplete);
-})
+});
+
+var musicBtnSuccess = function(json) {
+	alert(json['success']);
+	return true;
+}
+
+var musicBtnComplete = function() {
+	return true;
+}
+
+$('#musicConverter').on('click', '#musicBtn', function(e) {
+	e.preventDefault();
+	alert('music button pressed' + stock);
+	post('/convertMusic', {
+		'stock_symbol': stock
+	}, musicBtnSuccess, musicBtnComplete);
+	alert(stock);
+});

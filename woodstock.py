@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request, jsonify
 from stocks import *
+from song import *
 
 app = Flask(__name__)
 
@@ -31,6 +32,20 @@ def stock_info():
 			'success': 'success',
 			'stockName': json
 			})
+
+@app.route("/convertMusic", methods=["POST"])
+def convertToMusic():
+	print 'in music conversion'
+	try:
+		stock_symbol = unicode(request.form.get("stock_symbol"))
+	except Exception as e:
+		print e
+	print stock_symbol
+
+	return jsonify({
+		'success': 'success'
+		})
+
 
 
 if __name__ == "__main__":

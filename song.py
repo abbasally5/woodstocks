@@ -1,6 +1,6 @@
 from midiutil.MidiFile import MIDIFile
 import os, csv
-
+"""
 # create your MIDI object
 mf = MIDIFile(1)     # only 1 track
 track = 0   # the only track
@@ -31,12 +31,12 @@ mf.addNote(track, channel, pitch, time, duration, volume)
 # write it to disk
 with open("output.mid", 'wb') as outf:
     mf.writeFile(outf)
-
+"""
 def get_pitch(close):
 	num = int(round(close))
 	return num % 87 + 21
 
-def turn_to_song(file_name, stock_name):
+def convert_to_song(file_name, stock_name):
 	
 	mf = MIDIFile(1)
 	track = 0
@@ -73,5 +73,5 @@ def turn_to_song(file_name, stock_name):
 
 
 
-turn_to_song("stock.csv", "AAPL")
+#convert_to_song("stock.csv", "AAPL")
 

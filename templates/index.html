@@ -4,6 +4,7 @@
 	<title>Woodstocks</title>
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
 	<style type="text/css">
 		html {
@@ -19,12 +20,17 @@
 		#stockCards {
 			margin-top: 5em;
 		}
+
+		#title {
+			/*font-family: 'Lobster', cursive;*/
+			font-size: 56px;
+		}
 	</style>
 	</head>
 <body>
 	<div class="col-md-6 col-md-offset-3">
 		<div class="content">
-			<h1>Woodstocks</h1>
+			<h1 id="title">Woodstocks</h1>
 			<br />
 			<form class="form-inline" id="stockForm" method="POST" action="/stockquote">
 				<div class="form-group col-md-12 col-xs-12">			
@@ -34,9 +40,9 @@
 			</form>
 
 			<div id="stockCards">
-				
 			</div>
-			<btn			
+			<div id="musicConverter">
+			</div>			
 		</div>		
 	</div>
 
