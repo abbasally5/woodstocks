@@ -68,7 +68,7 @@ def convert_to_song(file_name):
 			time += 1
 			duration = 1
 			mf.addNote(track, channel, pitch, time, duration, volume)
-			i += 100
+			i += 20
 			#print i
 
 	with open('static/' + file_name + '.mid', 'wb') as outf:

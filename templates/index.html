@@ -7,7 +7,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
 	<style type="text/css">
-		html {
+		body {
 			background: url(static/wallstreet.jpg) no-repeat center center fixed;
 			background-size: cover;
 		}
@@ -33,9 +33,11 @@
 	</head>
 <body>
 	<div class="col-md-6 col-md-offset-3">
-		<div class="content">
-			<h1 id="title" class="text-danger">Woodstocks</h1>
-			<br />
+		<div class="content col-md-12">
+			<div>
+				<h1 id="title" class="text-danger">Woodstocks</h1>
+			</div>
+			
 			<form class="form-inline" id="stockForm" method="POST" action="/stockquote">
 				<div class="form-group col-md-12 col-xs-12">			
 					<input id="stockInput" type="text" class="form-control" name="stockInput" placeholder="Enter stock name">
